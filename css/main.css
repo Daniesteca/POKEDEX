@@ -141,6 +141,23 @@ main{
 
 .nombre-contenedor{
     display: flex;
+    align-items: center;
+    column-gap: .5rem;
+    flex-wrap: wrap;
+    justify-content: center;
+}
+
+.pokemon-id{
+    background-color: var(--clr-gray);
+    padding: .25rem .5rem;
+    border-radius: 100vmax;
+    font-size: .75rem;
+    font-weight: 500;
+
+}
+
+.pokemon-nombre{
+    font-size: 1.4rem;
 }
 
 /* Aquí comienzan los colores de botones según tipo */
