@@ -177,6 +177,7 @@ main{
 
 .pokemon-nombre{
     font-size: 1.4rem;
+    color: var(--clr-gray);
 }
 
 .pokemon-tipos{
@@ -197,12 +198,14 @@ main{
     display: flex;
     gap: 1rem;
     font-size: .85rem;
+    
 }
 
-.stats{
+.stat{
     background-color: var(--clr-gray);
     padding: .25rem .5rem;
     border-radius: 100vmax;
+    
 }
 
 /* Aquí comienzan los colores de botones según tipo */
