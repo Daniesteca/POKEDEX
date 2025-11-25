@@ -5,6 +5,9 @@
     --clr-gray: #ececec;
     --clr-white: #f7f7f7;
 
+    --bk-dark:#343A40;
+    --bk-darklight:#6C757D;
+
     --type-normal: #A8A878;
     --type-fire: #F08030;
     --type-water: #6890F0;
@@ -47,13 +50,12 @@ button {
 
 body{
     min-height: 100hv;
-
-    background-color: var(--clr-gray);
+    background-color: var(--bk-dark);
 }
 
 header{
     padding-block: 1rem;
-    box-shadow: 0 0 2rem -1rem rgba(0, 0, 0, .5);
+    box-shadow: 0 0 2rem -1rem rgba(244, 242, 242, 0.5);
     
 }
 
@@ -116,8 +118,8 @@ main{
 
 .pokemon{
      border-radius: 1rem;
-     background-color: var(--clr-white);
-     box-shadow: 0 0 3rem -1rem rgba(0, 0, 0, .25);
+     background-color: var(--clr-black);
+     box-shadow: 0 0 3rem -1rem rgba(135, 135, 135, 0.25);
      padding-block: 1rem;
      text-transform: uppercase;
      position: relative;
@@ -132,7 +134,7 @@ main{
     transform: translate(-50%);
     font-size: 6rem;
     font-weight: 800;
-    color: var(--clr-gray);
+    color: var(--bk-darklight);
     z-index: -1;
 }
 
