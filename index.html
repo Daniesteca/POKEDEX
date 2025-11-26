@@ -44,6 +44,35 @@
     </div>
 </main>
 
+<!-- 🔥 POPUP POKÉMON -->
+<div id="pokemonPopup" class="popup-container hidden">
+  <div class="popup-card">
+    
+    <button id="closePopup" class="close-btn">X</button>
+
+    <div class="popup-img">
+      <img id="popupImg" src="" alt="pokemon image">
+    </div>
+
+    <h2 id="popupName"></h2>
+    <p id="popupId"></p>
+
+    <div id="popupTypes" class="types"></div>
+
+    <div class="info">
+      <p><strong>Altura:</strong> <span id="popupHeight"></span> M</p>
+      <p><strong>Peso:</strong> <span id="popupWeight"></span> KG</p>
+    </div>
+
+    <div class="stats">
+      <strong>Stats:</strong>
+      <ul id="popupStats"></ul>
+    </div>
+
+  </div>
+</div>
+
+
 <script src="./js/main.js" ></script>
 </body>
 </html>

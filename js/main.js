@@ -75,3 +75,48 @@ botonesHeader.forEach(boton => boton.addEventListener("click", (event) => {
     }
 
 }))
+
+
+// POPUP ******************************************************
+
+
+/* 🎧 ESCUCHAR CLICK EN TARJETAS */
+const listaPokemonEl = document.querySelector("#listaPokemon");
+
+listaPokemonEl.addEventListener("click", (event) => {
+  const card = event.target.closest(".pokemon");
+  if (!card) return;
+// Quitar ceros en el ID 
+  const idText = card.querySelector(".pokemon-id")?.textContent || "";
+  const pokemonId = parseInt(idText.replace("#", "").trim(), 10);
+  
+  console.log("📌 Click → Solicitar datos de API con ID:", pokemonId);
+
+  // ✔ Aquí la llamada correcta
+  getPokemonInfo(pokemonId);
+});
+
+
+/* 🔍 FUNCIÓN PARA OBTENER DATOS DEL POKÉMON - prueba */
+async function getPokemonInfo(pokemonId) {
+  try {
+    const response = await fetch(`${URL}${pokemonId}`);
+    
+    if (!response.ok) throw new Error("Pokémon no encontrado");
+
+    const data = await response.json();
+    
+    console.log("📌 Datos completos del Pokémon:");
+    console.log(data);
+
+    console.log("Nombre:", data.name);
+    console.log("Imagen:", data.sprites.other["official-artwork"].front_default);
+    console.log("Altura:", data.height);
+    console.log("Peso:", data.weight);
+    console.log("Tipos:", data.types.map(t => t.type.name));
+    console.log("Stats:", data.stats.map(s => `${s.stat.name}: ${s.base_stat}`));
+
+  } catch (error) {
+    console.error("❌ Error obteniendo los datos del Pokémon:", error);
+  }
+}

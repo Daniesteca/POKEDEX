@@ -298,3 +298,63 @@ main{
     background-color: var(--type-fairy);
     color: var(--clr-black);
 }
+
+/* POPUP ****************************************/
+/* 🔥 POPUP GENERAL */
+.popup-container {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0,0,0,0.75);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 999;
+}
+
+.hidden {
+  display: none;
+}
+
+/* TARJETA POPUP */
+.popup-card {
+  background: #232323;
+  padding: 25px;
+  width: 350px;
+  border-radius: 20px;
+  color: white;
+  text-align: center;
+  position: relative;
+}
+
+.popup-img img {
+  width: 180px;
+}
+
+.close-btn {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  background: crimson;
+  border: none;
+  color: #fff;
+  cursor: pointer;
+  border-radius: 50%;
+  width: 30px;
+  height: 30px;
+}
+
+.types span {
+  margin: 5px;
+  padding: 5px 12px;
+  border-radius: 12px;
+  font-size: 14px;
+  color: #fff;
+}
+
+.stats ul {
+  list-style: none;
+  padding: 0;
+}
