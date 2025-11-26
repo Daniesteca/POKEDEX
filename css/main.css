@@ -217,19 +217,19 @@ main{
     border-radius: 100vmax;
 }
 
-.pokemon-stats{
+.pokemon-statsp{
     display: flex;
     gap: 1rem;
     font-size: .85rem;
     
 }
 
-.stat{
-    background-color: var(--clr-gray);
+.statsp{
+    color: var(--clr-gray);
     padding: .25rem .5rem;
     border-radius: 100vmax;
-    
 }
+
 
 /* Aquí comienzan los colores de botones según tipo */
 .normal {
@@ -325,6 +325,7 @@ main{
 /* POPUP ****************************************/
 /* 🔥 POPUP GENERAL */
 .popup-container {
+  padding: 24px;
   position: fixed;
   top: 0;
   left: 0;
@@ -343,17 +344,48 @@ main{
 
 /* TARJETA POPUP */
 .popup-card {
+  width: 100%;
+  max-width: 760px;
+  padding: 28px;
+  box-shadow: 0 10px 30px rgba(0,0,0,0.45);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 16px;
   background: #232323;
-  padding: 25px;
-  width: 350px;
   border: 3px solid #ffffff60;
   border-radius: 20px;
-  color: #ffff;
-  text-align: center;
+  color: #fff;
   position: relative;
+  text-align: center;
 }
 
-/* 🎨 Colores dinámicos según el tipo del Pokémon */
+.popup-header img {
+  width: 180px;
+  display: block;
+  margin: 0 auto;
+}
+
+.meta-row {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px;
+  justify-content: center;
+  align-items: center;
+}
+
+.meta-row p {
+  margin: 0;
+  font-size: 0.95rem;
+}
+
+/* Centrado de debilidades y evoluciones */
+.weaknesses, .evolutions {
+  justify-content: center;
+}
+
+
+/* 🎨 Colores dinámicos según el tipo del Pokémon COLOR TARJETA*/
 .popup-card.fire {
   background-color: var(--popup-fire);
 }
@@ -428,9 +460,30 @@ main{
 
 /* 🎨 FIN Colores dinámicos según el tipo del Pokémon */
 
+/* Imagen del pokemon (columna izquierda) */
+.popup-img {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
 
 .popup-img img {
   width: 180px;
+  height: auto;
+}
+
+
+
+/* Info meta (Altura / Peso) en 2 columnas */
+.info {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 8px;
+  margin-top: 6px;
+}
+.info p {
+  margin: 0;
+  font-size: 0.95rem;
 }
 
 .close-btn {
@@ -454,46 +507,123 @@ main{
   color: #fff;
 }
 
-.stats ul {
-  list-style: none;
-  padding: 0;
+
+/*BARRAS DE  lAS ESTADISTICAS BASE ********************************************/
+
+.stats-section {
+  margin-top: 16px;
 }
 
-
-.evolution-section {
-  margin-top: 10px;
+.stat{
+    background-color: var(--clr-gray);
+    padding: .25rem .5rem;
+    border-radius: 50vmax;
+    
 }
 
-.evolutions {
-  display: flex;
-  gap: 15px;
-  justify-content: center;
-  flex-wrap: wrap;
+.stats-container {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr); /* 2 columnas */
+  gap: 10px 20px;
+  width: 100%;
 }
 
-.evolution-card {
+.stat {
+  display: grid;
+  grid-template-columns: 70px 1fr 35px;
+  align-items: center;
+  gap: 6px;
+  width: 100%;
+  color: var(--clr-white);
+}
+
+.stat-item {
+  width: 100%;
+  max-width: 300px;
   text-align: center;
-  background: #ffffff40;
-  padding: 8px;
-  border-radius: 10px;
-  width: 95px;
 }
 
-.evolution-card img {
-  width: 80px;
-  height: auto;
+.stat-name {
+  text-transform: capitalize;
+  font-weight: 600;
 }
 
-.evolution-method {
-  font-size: 12px;
-  opacity: .9;
-  margin-top: 4px;
+/* Cuando la stat está en el contenedor de dos columnas, queremos que el nombre ocupe un ancho fijo */
+.stat .stat-name {
+  width: 78px;
+  font-weight: 700;
 }
 
+.stat-bar {
+  position: relative;
+  width: 100%;
+  height: 8px;
+  background: rgba(255,255,255,0.15);
+  border-radius: 8px;
+  overflow: hidden;
+}
+
+.stat-bar-fill {
+  height: 100%;
+  width: 0%;
+  border-radius: 8px;
+  transition: width 0.8s ease; /* animación 👌 */
+}
+
+.stat-value {
+  text-align: right;
+  font-weight: 700;
+}
+
+
+/* Aseguramos que la barra se expanda correctamente */
+.stat .stat-bar {
+  flex: 1;
+  height: 10px;
+  background: rgba(255,255,255,0.12);
+  border-radius: 999px;
+  overflow: hidden;
+}
+.stat .stat-bar .stat-bar-fill {
+  height: 100%;
+  width: 0%;
+  transition: width 0.9s cubic-bezier(.2,.9,.2,1);
+}
+
+/* Label del valor */
+.stat .stat-value {
+  width: 40px;
+  text-align: right;
+  font-weight: 800;
+}
+
+/* Ajustes visuales para badges (debilidades / tipos) */
+.types span, .weakness {
+  padding: 6px 10px;
+  border-radius: 999px;
+  font-weight: 700;
+  font-size: .85rem;
+}
+
+/* ESTILOS DEBILIDADES *************************************************************************************/
 
 .weakness-section {
   margin-top: 12px;
   text-align: center;
+}
+
+/* Debilidades y metas juntas: contenedor con 2 columnas */
+.meta-weakness-row {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 12px;
+  align-items: center;
+  margin-top: 8px;
+}
+
+/* Aseguramos que las badges de debilidad se vean centradas */
+.weakness-section, .info {
+  align-self: center;
 }
 
 .weaknesses {
@@ -540,4 +670,39 @@ main{
 .weakness.fairy { background: var(--type-fairy); color: var(--clr-black); }
 
 
+/*ESTILOS EVOLUCIONES***********************************************************/
 
+
+.evolution-section {
+  margin-top: 10px;
+}
+
+
+/* Evoluciones ahora en grid de 3 columnas */
+.evolutions {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 12px;
+  justify-items: center;
+}
+
+
+/* Cada tarjeta de evolución ocupa todo el ancho de su celda */
+.evolution-card {
+  width: 100%;
+  background: rgba(255,255,255,0.06);
+  padding: 8px;
+  border-radius: 10px;
+  text-align: center;
+}
+
+.evolution-card img {
+  width: 80px;
+  height: auto;
+}
+
+.evolution-method {
+  font-size: 12px;
+  opacity: .9;
+  margin-top: 4px;
+}
