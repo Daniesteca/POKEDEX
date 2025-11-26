@@ -147,7 +147,36 @@ function renderWeaknesses(weaknesses) {
   });
 }
 
+function renderStats(stats, mainType) {
+  const container = document.getElementById("statsContainer");
+  if (!container) return;
 
+  container.innerHTML = "";
+
+  const maxStat = 255; // máximo real de un stat base
+
+  stats.forEach(s => {
+    const percent = Math.min((s.base_stat / maxStat) * 100, 100);
+
+    const row = document.createElement("div");
+    row.className = "stat";
+
+    row.innerHTML = `
+      <span class="stat-name">${s.stat.name}</span>
+      <div class="stat-bar">
+        <div class="stat-bar-fill ${mainType}"></div>
+      </div>
+      <span class="stat-value">${s.base_stat}</span>
+    `;
+
+    container.appendChild(row);
+
+    // animación 🌈
+    requestAnimationFrame(() => {
+      row.querySelector(".stat-bar-fill").style.width = `${percent}%`;
+    });
+  });
+}
 
 
 /**
@@ -339,6 +368,14 @@ async function getPokemonInfo(pokemonId) {
 
     //cargar evoluciones pokemon
     loadEvolutionChain(data.species.url);
+
+    // Tipos
+    const typeNames = data.types.map(t => t.type.name);
+    const mainType2 = typeNames[0];
+
+    // Render Stats
+    renderStats(data.stats, mainType2);
+
 
   } catch (error) {
     console.error("❌ Error obteniendo los datos del Pokémon:", error);

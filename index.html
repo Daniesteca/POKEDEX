@@ -47,39 +47,39 @@
 <!-- 🔥 POPUP POKÉMON -->
 <div id="pokemonPopup" class="popup-container hidden">
   <div class="popup-card">
-    
+
     <button id="closePopup" class="close-btn">X</button>
 
-    <div class="popup-img">
-      <img id="popupImg" src="" alt="pokemon image">
-    </div>
-
+    <div class="popup-header">
+    <img id="popupImg" src="" alt="pokemon image">
     <h2 id="popupName"></h2>
+    </div>
+
+    <div class="meta-row">
     <p id="popupId"></p>
-
     <div id="popupTypes" class="types"></div>
-
-    <div class="info">
-      <p><strong>Altura:</strong> <span id="popupHeight"></span> M</p>
-      <p><strong>Peso:</strong> <span id="popupWeight"></span> KG</p>
+    <p><strong>Altura:</strong> <span id="popupHeight"></span> M</p>
+    <p><strong>Peso:</strong> <span id="popupWeight"></span> KG</p>
     </div>
 
-    <div class="stats">
-      <strong>Stats:</strong>
-      <ul id="popupStats"></ul>
+    <!-- 🔹 Stats -->
+    <div class="stats-section">
+    <strong>Estadísticas base:</strong>
+    <ul id="popupStats" hidden></ul> <!-- SE MANTIENE -->
+    <div id="statsContainer" class="stats-container"></div>
     </div>
 
-    <div class="evolution-section">
-        <strong>Evoluciones:</strong>
-        <div id="evolutionContainer" class="evolutions"></div>
-    </div>
-
+    <!-- 🔹 Debilidades -->
     <div class="weakness-section">
-        <strong>Debilidades:</strong>
-        <div id="weaknessContainer" class="weaknesses"></div>
+    <strong>Debilidades:</strong>
+    <div id="weaknessContainer" class="weaknesses"></div>
     </div>
 
-
+    <!-- 🔹 Evoluciones -->
+    <div class="evolution-section">
+    <strong>Evoluciones:</strong>
+    <div id="evolutionContainer" class="evolutions"></div>
+    </div>
 
   </div>
 </div>

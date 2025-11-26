@@ -325,6 +325,7 @@ main{
 /* POPUP ****************************************/
 /* 🔥 POPUP GENERAL */
 .popup-container {
+  padding: 24px;
   position: fixed;
   top: 0;
   left: 0;
@@ -343,15 +344,47 @@ main{
 
 /* TARJETA POPUP */
 .popup-card {
+  width: 100%;
+  max-width: 760px;
+  padding: 28px;
+  box-shadow: 0 10px 30px rgba(0,0,0,0.45);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 16px;
   background: #232323;
-  padding: 25px;
-  width: 350px;
   border: 3px solid #ffffff60;
   border-radius: 20px;
-  color: #ffff;
-  text-align: center;
+  color: #fff;
   position: relative;
+  text-align: center;
 }
+
+.popup-header img {
+  width: 180px;
+  display: block;
+  margin: 0 auto;
+}
+
+.meta-row {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px;
+  justify-content: center;
+  align-items: center;
+}
+
+.meta-row p {
+  margin: 0;
+  font-size: 0.95rem;
+}
+
+/* Centrado de debilidades y evoluciones */
+.weaknesses, .evolutions {
+  justify-content: center;
+}
+
+
 
 /* 🎨 Colores dinámicos según el tipo del Pokémon */
 .popup-card.fire {
@@ -428,9 +461,30 @@ main{
 
 /* 🎨 FIN Colores dinámicos según el tipo del Pokémon */
 
+/* Imagen del pokemon (columna izquierda) */
+.popup-img {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
 
 .popup-img img {
   width: 180px;
+  height: auto;
+}
+
+
+
+/* Info meta (Altura / Peso) en 2 columnas */
+.info {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 8px;
+  margin-top: 6px;
+}
+.info p {
+  margin: 0;
+  font-size: 0.95rem;
 }
 
 .close-btn {
@@ -454,29 +508,27 @@ main{
   color: #fff;
 }
 
-.stats ul {
-  list-style: none;
-  padding: 0;
-}
-
-
 .evolution-section {
   margin-top: 10px;
 }
 
+
+/* Evoluciones ahora en grid de 3 columnas */
 .evolutions {
-  display: flex;
-  gap: 15px;
-  justify-content: center;
-  flex-wrap: wrap;
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 12px;
+  justify-items: center;
 }
 
+
+/* Cada tarjeta de evolución ocupa todo el ancho de su celda */
 .evolution-card {
-  text-align: center;
-  background: #ffffff40;
+  width: 100%;
+  background: rgba(255,255,255,0.06);
   padding: 8px;
   border-radius: 10px;
-  width: 95px;
+  text-align: center;
 }
 
 .evolution-card img {
@@ -491,9 +543,24 @@ main{
 }
 
 
+
 .weakness-section {
   margin-top: 12px;
   text-align: center;
+}
+
+/* Debilidades y metas juntas: contenedor con 2 columnas */
+.meta-weakness-row {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 12px;
+  align-items: center;
+  margin-top: 8px;
+}
+
+/* Aseguramos que las badges de debilidad se vean centradas */
+.weakness-section, .info {
+  align-self: center;
 }
 
 .weaknesses {
@@ -540,4 +607,113 @@ main{
 .weakness.fairy { background: var(--type-fairy); color: var(--clr-black); }
 
 
+/*Barras de los stats  */
 
+.stats-section {
+  margin-top: 16px;
+}
+
+.stats-container {
+  width: 100%;
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 12px 24px;
+  justify-items: center;
+  margin: 10px 0 20px;
+}
+
+.stat {
+  display: grid;
+  grid-template-columns: 90px 1fr 40px;
+  align-items: center;
+  font-size: .85rem;
+  color: var(--clr-white);
+}
+
+.stat-item {
+  width: 100%;
+  max-width: 300px;
+  text-align: center;
+}
+
+.stat-name {
+  text-transform: capitalize;
+  font-weight: 600;
+}
+
+/* Cuando la stat está en el contenedor de dos columnas, queremos que el nombre ocupe un ancho fijo */
+.stat .stat-name {
+  width: 78px;
+  font-weight: 700;
+}
+
+.stat-bar {
+  position: relative;
+  width: 100%;
+  height: 8px;
+  background: rgba(255,255,255,0.15);
+  border-radius: 8px;
+  overflow: hidden;
+}
+
+.stat-bar-fill {
+  height: 100%;
+  width: 0%;
+  border-radius: 8px;
+  transition: width 0.8s ease; /* animación 👌 */
+}
+
+
+/* Aseguramos que la barra se expanda correctamente */
+.stat .stat-bar {
+  flex: 1;
+  height: 10px;
+  background: rgba(255,255,255,0.12);
+  border-radius: 999px;
+  overflow: hidden;
+}
+.stat .stat-bar .stat-bar-fill {
+  height: 100%;
+  width: 0%;
+  transition: width 0.9s cubic-bezier(.2,.9,.2,1);
+}
+
+.stat-value {
+  text-align: right;
+  font-weight: 700;
+}
+
+/* Label del valor */
+.stat .stat-value {
+  width: 40px;
+  text-align: right;
+  font-weight: 800;
+}
+
+/* Ajustes visuales para badges (debilidades / tipos) */
+.types span, .weakness {
+  padding: 6px 10px;
+  border-radius: 999px;
+  font-weight: 700;
+  font-size: .85rem;
+}
+
+/* =============================
+   Responsividad (mobile)
+   ============================= */
+@media (max-width: 760px) {
+  .popup-card {
+    grid-template-columns: 1fr; /* apilar */
+    max-width: 94%;
+    padding: 18px;
+  }
+
+  /* Evoluciones y stats pasan a 1 columna en móvil */
+  .evolutions { grid-template-columns: repeat(3, 1fr); /* intenta mantener 3 cols en pantallas medias */ }
+  @media (max-width: 520px) {
+    .evolutions { grid-template-columns: 1fr; }
+    .stats-container { grid-template-columns: 1fr; }
+    .meta-weakness-row { grid-template-columns: 1fr; }
+    .info { grid-template-columns: 1fr; }
+  }
+}
