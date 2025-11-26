@@ -293,7 +293,6 @@ async function getPokemonInfo(pokemonId) {
     const response = await fetch(`${URL}${pokemonId}`);
     const data = await response.json();
 
-    // Si usaste data.types anteriormente, puedes pasar sus URLs:
     const typeUrls = data.types.map(t => t.type.url);
     loadWeaknesses(typeUrls);
 
