@@ -458,3 +458,34 @@ main{
   list-style: none;
   padding: 0;
 }
+
+
+.evolution-section {
+  margin-top: 10px;
+}
+
+.evolutions {
+  display: flex;
+  gap: 15px;
+  justify-content: center;
+  flex-wrap: wrap;
+}
+
+.evolution-card {
+  text-align: center;
+  background: #ffffff40;
+  padding: 8px;
+  border-radius: 10px;
+  width: 95px;
+}
+
+.evolution-card img {
+  width: 80px;
+  height: auto;
+}
+
+.evolution-method {
+  font-size: 12px;
+  opacity: .9;
+  margin-top: 4px;
+}

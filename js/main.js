@@ -121,6 +121,68 @@ listaPokemonEl.addEventListener("click", (event) => {
 //   }
 // }
 
+/**Evoluciones pokemon */
+function renderEvolutionChain(evolutionList) {
+  const container = document.getElementById("evolutionContainer");
+  container.innerHTML = "";
+
+  evolutionList.forEach(evo => {
+    const div = document.createElement("div");
+    div.classList.add("evolution-card");
+
+    div.innerHTML = `
+      <img src="${evo.img}" alt="${evo.name}">
+      <p>${evo.name}</p>
+      <p class="evolution-method">${evo.method}</p>
+    `;
+
+    container.appendChild(div);
+  });
+}
+
+
+/** Evoluciones 2 */
+async function loadEvolutionChain(speciesUrl) {
+  try {
+    const speciesRes = await fetch(speciesUrl);
+    const speciesData = await speciesRes.json();
+
+    const evoRes = await fetch(speciesData.evolution_chain.url);
+    const evoData = await evoRes.json();
+
+    const evoChain = [];
+    let evoStage = evoData.chain;
+
+    while (evoStage) {
+      const evoName = evoStage.species.name;
+      let methodText = "—";
+
+      if (evoStage.evolution_details.length > 0) {
+        const details = evoStage.evolution_details[0];
+        if (details.min_level) methodText = `Lvl ${details.min_level}`;
+        else if (details.item) methodText = details.item.name;
+      }
+
+      const infoRes = await fetch(`${URL}${evoName}`);
+      const infoData = await infoRes.json();
+
+      evoChain.push({
+        name: evoName,
+        img: infoData.sprites.other["official-artwork"].front_default,
+        method: methodText
+      });
+
+      evoStage = evoStage.evolves_to[0];
+    }
+
+    renderEvolutionChain(evoChain);
+
+  } catch (error) {
+    console.error("❌ Error cargando evoluciones:", error);
+  }
+}
+
+
 /* Insertar datos en POP UP HTML*/
 async function getPokemonInfo(pokemonId) {
   try {
@@ -168,6 +230,8 @@ async function getPokemonInfo(pokemonId) {
     // Agregar la clase del tipo para el color dinámico
     popupCard.classList.add(mainType);
 
+    //cargar evoluciones pokemon
+    loadEvolutionChain(data.species.url);
 
   } catch (error) {
     console.error("❌ Error obteniendo los datos del Pokémon:", error);
@@ -175,6 +239,9 @@ async function getPokemonInfo(pokemonId) {
 
   
 }
+
+
+
 
 document.getElementById("closePopup").addEventListener("click", () => {
   document.getElementById("pokemonPopup").classList.add("hidden");
