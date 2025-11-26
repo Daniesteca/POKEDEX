@@ -121,6 +121,110 @@ listaPokemonEl.addEventListener("click", (event) => {
 //   }
 // }
 
+/***********Debilidades pokemon*********** */
+
+/**
+ * renderWeaknesses(weaknesses)
+ * weaknesses: [{type, mult}, ...]
+ */
+function renderWeaknesses(weaknesses) {
+  const container = document.getElementById("weaknessContainer");
+  if (!container) return;
+
+  container.innerHTML = "";
+
+  if (!weaknesses || weaknesses.length === 0) {
+    container.innerHTML = `<span class="weakness">—</span>`;
+    return;
+  }
+
+  weaknesses.forEach(w => {
+    const span = document.createElement("span");
+    span.className = `weakness ${w.type}`; // añade clase tipo para color si existe
+    const multText = (w.mult % 1 === 0) ? `${w.mult}x` : `${w.mult}x`; // ejemplo "2x" o "1.5x"
+    span.innerHTML = `<strong style="font-weight:700; margin-right:6px;">${multText}</strong> ${w.type}`;
+    container.appendChild(span);
+  });
+}
+
+
+
+
+/**
+ * loadWeaknesses(typeUrls)
+ * typeUrls: array de URLs (data.types[].type.url) o nombres (acepta ambos)
+ */
+async function loadWeaknesses(typeInputs) {
+  try {
+    if (!typeInputs || typeInputs.length === 0) {
+      renderWeaknesses([]);
+      return;
+    }
+
+    // Acepta array de urls o nombres; normalizamos a URLs si vienen nombres
+    const typeUrls = typeInputs.map(t => {
+      if (t.startsWith && t.startsWith("http")) return t;
+      // si es nombre, construimos la url del tipo
+      return `${URL}${t}`;
+    });
+
+    // Peticiones paralelas por cada tipo del pokemon
+    const responses = await Promise.all(typeUrls.map(u => fetch(u)));
+    const okResponses = responses.map((r, i) => {
+      if (!r.ok) {
+        console.warn("Tipo no encontrado:", typeUrls[i]);
+        return null;
+      }
+      return r.json();
+    });
+
+    const typeDataList = (await Promise.all(okResponses)).filter(Boolean);
+
+    // Mapa acumulador de multiplicadores por tipo atacante
+    // ej: { water: 2, ground: 0.5, ghost: 0 }
+    const multiplierMap = {};
+
+    // Inicial no necesario; iremos multiplicando según cada tipo del pokemon
+    typeDataList.forEach(typeData => {
+      const relations = typeData.damage_relations;
+
+      // double_damage_from => x2
+      relations.double_damage_from.forEach(t => {
+        multiplierMap[t.name] = (multiplierMap[t.name] || 1) * 2;
+      });
+
+      // half_damage_from => x0.5
+      relations.half_damage_from.forEach(t => {
+        multiplierMap[t.name] = (multiplierMap[t.name] || 1) * 0.5;
+      });
+
+      // no_damage_from => x0
+      relations.no_damage_from.forEach(t => {
+        multiplierMap[t.name] = 0; // anula todo
+      });
+
+      // nota: esto considera cada tipo del pokemon y multiplica sucesivamente,
+      // lo que da 4x, 2x, 1x, 0.5x, 0x correctamente para dobles tipos.
+    });
+
+    // Convertir a array y filtrar solo > 1 (debilidades)
+    const weaknesses = Object.entries(multiplierMap)
+      .map(([type, mult]) => ({ type, mult }))
+      .filter(item => item.mult > 1)
+      .sort((a, b) => b.mult - a.mult); // mostrar primero mayores (ej: 4x)
+
+    renderWeaknesses(weaknesses);
+  } catch (err) {
+    console.error("Error cargando debilidades:", err);
+    renderWeaknesses([]);
+  }
+}
+
+
+
+/********************** */
+
+
 /**Evoluciones pokemon */
 function renderEvolutionChain(evolutionList) {
   const container = document.getElementById("evolutionContainer");
@@ -189,6 +293,11 @@ async function getPokemonInfo(pokemonId) {
     const response = await fetch(`${URL}${pokemonId}`);
     const data = await response.json();
 
+    // Si usaste data.types anteriormente, puedes pasar sus URLs:
+    const typeUrls = data.types.map(t => t.type.url);
+    loadWeaknesses(typeUrls);
+
+
     // Mostrar popup
     document.getElementById("pokemonPopup").classList.remove("hidden");
 
@@ -239,8 +348,6 @@ async function getPokemonInfo(pokemonId) {
 
   
 }
-
-
 
 
 document.getElementById("closePopup").addEventListener("click", () => {

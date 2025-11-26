@@ -489,3 +489,55 @@ main{
   opacity: .9;
   margin-top: 4px;
 }
+
+
+.weakness-section {
+  margin-top: 12px;
+  text-align: center;
+}
+
+.weaknesses {
+  display: flex;
+  gap: .5rem;
+  justify-content: center;
+  flex-wrap: wrap;
+  margin-top: .5rem;
+}
+
+.weakness {
+  padding: 6px 10px;
+  border-radius: 999px;
+  background: rgba(255,255,255,0.12);
+  color: #fff;
+  font-weight: 600;
+  font-size: .85rem;
+  text-transform: capitalize;
+  display: inline-flex;
+  align-items: center;
+  gap: .5rem;
+  min-width: 72px;
+  justify-content: center;
+}
+
+/*  badges toman el color del tipo  */
+.weakness.normal { background: var(--type-normal); color: var(--clr-black); }
+.weakness.fire { background: var(--type-fire); color: var(--clr-black); }
+.weakness.water { background: var(--type-water); color: var(--clr-black); }
+.weakness.grass { background: var(--type-grass); color: var(--clr-black); }
+.weakness.electric { background: var(--type-electric); color: var(--clr-black); }
+.weakness.ice { background: var(--type-ice); color: var(--clr-black); }
+.weakness.fighting { background: var(--type-fighting); color: var(--clr-black); }
+.weakness.poison { background: var(--type-poison); color: var(--clr-black); }
+.weakness.ground { background: var(--type-ground); color: var(--clr-black); }
+.weakness.flying { background: var(--type-flying); color: var(--clr-black); }
+.weakness.psychic { background: var(--type-psychic); color: var(--clr-black); }
+.weakness.bug { background: var(--type-bug); color: var(--clr-black); }
+.weakness.rock { background: var(--type-rock); color: var(--clr-black); }
+.weakness.ghost { background: var(--type-ghost); color: var(--clr-black); }
+.weakness.dark { background: var(--type-dark); color: var(--clr-black); }
+.weakness.dragon { background: var(--type-dragon); color: var(--clr-black); }
+.weakness.steel { background: var(--type-steel); color: var(--clr-black); }
+.weakness.fairy { background: var(--type-fairy); color: var(--clr-black); }
+
+
+
