@@ -8,6 +8,7 @@
     --bk-dark:#343A40;
     --bk-darklight:#6C757D;
 
+    /* colores pokemon - BOTONES*/
     --type-normal: #A8A878;
     --type-fire: #F08030;
     --type-water: #6890F0;
@@ -26,6 +27,28 @@
     --type-dragon: #7038F8;
     --type-steel: #B8B8D0;
     --type-fairy: #F0B6BC;
+
+    /* colores pokemon - Popup*/
+
+    --popup-normal: #bebea9;
+    --popup-fire: #efa774;
+    --popup-water: #9dd3f0;
+    --popup-grass: #c6dcbb;
+    --popup-electric: #f0e2aa;
+    --popup-ice: #95d3d3;
+    --popup-fighting: #bf6560;
+    --popup-poison: #d7afd7;
+    --popup-ground: #f5e2ad;
+    --popup-flying: #c6b8ef;
+    --popup-psychic: #f5b4c7;
+    --popup-bug: #d5db9e;
+    --popup-rock: #ccc08b;
+    --popup-ghost: #b2a8c2;
+    --popup-dark: #9f8b7d;
+    --popup-dragon: #b69cf2;
+    --popup-steel: #dcdcfa;
+    --popup-fairy: #f0d1d4;
+
 }
 
 * {
@@ -323,11 +346,88 @@ main{
   background: #232323;
   padding: 25px;
   width: 350px;
+  border: 3px solid #ffffff60;
   border-radius: 20px;
-  color: white;
+  color: #ffff;
   text-align: center;
   position: relative;
 }
+
+/* 🎨 Colores dinámicos según el tipo del Pokémon */
+.popup-card.fire {
+  background-color: var(--popup-fire);
+}
+
+.popup-card.water {
+  background-color: var(--popup-water);
+}
+
+.popup-card.grass {
+  background-color: var(--popup-grass);
+}
+
+.popup-card.electric {
+  background-color: var(--popup-electric);
+}
+
+.popup-card.ice {
+  background-color: var(--popup-ice);
+}
+
+.popup-card.fighting {
+  background-color: var(--popup-fighting);
+}
+
+.popup-card.poison {
+  background-color: var(--popup-poison);
+}
+
+.popup-card.ground {
+  background-color: var(--popup-ground);
+}
+
+.popup-card.flying {
+  background-color: var(--popup-flying);
+}
+
+.popup-card.psychic {
+  background-color: var(--popup-psychic);
+}
+
+.popup-card.bug {
+  background-color: var(--popup-bug);
+}
+
+.popup-card.rock {
+  background-color: var(--popup-rock);
+}
+
+.popup-card.ghost {
+  background-color: var(--popup-ghost);
+}
+
+.popup-card.dragon {
+  background-color: var(--popup-dragon);
+}
+
+.popup-card.dark {
+  background-color: var(--popup-dark);
+}
+
+.popup-card.steel {
+  background-color: var(--popup-steel);
+}
+
+.popup-card.fairy {
+  background-color: var(--popup-fairy);
+}
+
+.popup-card.normal {
+  background-color: var(--popup-normal);
+}
+
+/* 🎨 FIN Colores dinámicos según el tipo del Pokémon */
+
 
 .popup-img img {
   width: 180px;

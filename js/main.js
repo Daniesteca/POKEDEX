@@ -98,25 +98,85 @@ listaPokemonEl.addEventListener("click", (event) => {
 
 
 /* 🔍 FUNCIÓN PARA OBTENER DATOS DEL POKÉMON - prueba */
+// async function getPokemonInfo(pokemonId) {
+//   try {
+//     const response = await fetch(`${URL}${pokemonId}`);
+    
+//     if (!response.ok) throw new Error("Pokémon no encontrado");
+
+//     const data = await response.json();
+    
+//     console.log("📌 Datos completos del Pokémon:");
+//     console.log(data);
+
+//     console.log("Nombre:", data.name);
+//     console.log("Imagen:", data.sprites.other["official-artwork"].front_default);
+//     console.log("Altura:", data.height);
+//     console.log("Peso:", data.weight);
+//     console.log("Tipos:", data.types.map(t => t.type.name));
+//     console.log("Stats:", data.stats.map(s => `${s.stat.name}: ${s.base_stat}`));
+
+//   } catch (error) {
+//     console.error("❌ Error obteniendo los datos del Pokémon:", error);
+//   }
+// }
+
+/* Insertar datos en POP UP HTML*/
 async function getPokemonInfo(pokemonId) {
   try {
     const response = await fetch(`${URL}${pokemonId}`);
-    
-    if (!response.ok) throw new Error("Pokémon no encontrado");
-
     const data = await response.json();
-    
-    console.log("📌 Datos completos del Pokémon:");
-    console.log(data);
 
-    console.log("Nombre:", data.name);
-    console.log("Imagen:", data.sprites.other["official-artwork"].front_default);
-    console.log("Altura:", data.height);
-    console.log("Peso:", data.weight);
-    console.log("Tipos:", data.types.map(t => t.type.name));
-    console.log("Stats:", data.stats.map(s => `${s.stat.name}: ${s.base_stat}`));
+    // Mostrar popup
+    document.getElementById("pokemonPopup").classList.remove("hidden");
+
+    // Insertar datos en HTML del Popup
+    document.getElementById("popupImg").src = data.sprites.other["official-artwork"].front_default;
+    document.getElementById("popupName").textContent = data.name.toUpperCase();
+    document.getElementById("popupId").textContent = `#${pokemonId}`;
+    document.getElementById("popupHeight").textContent = data.height;
+    document.getElementById("popupWeight").textContent = data.weight;
+
+    // Tipos
+    const typesEl = document.getElementById("popupTypes");
+    typesEl.innerHTML = "";
+    data.types.forEach(t => {
+      const typeBtn = document.createElement("span");
+      typeBtn.textContent = t.type.name.toUpperCase();
+      typeBtn.classList.add(t.type.name); // Para colores personalizados
+      typesEl.appendChild(typeBtn);
+    });
+
+    // Stats
+    const statsEl = document.getElementById("popupStats");
+    statsEl.innerHTML = "";
+    data.stats.forEach(s => {
+      const li = document.createElement("li");
+      li.textContent = `${s.stat.name.toUpperCase()}: ${s.base_stat}`;
+      statsEl.appendChild(li);
+    });
+
+    // Obtener tipo principal del Pokémon
+    const mainType = data.types[0].type.name;
+
+    // Referencia a la tarjeta popup
+    const popupCard = document.querySelector(".popup-card");
+
+    // Limpiar clases anteriores de tipo
+    popupCard.className = "popup-card";
+
+    // Agregar la clase del tipo para el color dinámico
+    popupCard.classList.add(mainType);
+
 
   } catch (error) {
     console.error("❌ Error obteniendo los datos del Pokémon:", error);
   }
+
+  
 }
+
+document.getElementById("closePopup").addEventListener("click", () => {
+  document.getElementById("pokemonPopup").classList.add("hidden");
+});
+
