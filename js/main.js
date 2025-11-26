@@ -9,6 +9,7 @@ for (let i = 1; i <= 151; i++){
     
 }
 
+// tarjeta inicial pokedex
 function mostrarpokemon(poke){
 
 
@@ -22,8 +23,6 @@ function mostrarpokemon(poke){
     } else if( pokeId.length === 2){
         pokeId = "0" + pokeId;
     }
-
-    
 
     const div = document.createElement("div");
     div.classList.add("pokemon");
@@ -40,15 +39,15 @@ function mostrarpokemon(poke){
             <div class="pokemon-tipos">
                 ${tipos}
             </div>
-            <div class="pokemon-stats">
-                <p class="stat">${poke.height}m</p>
-                <p class="stat">${poke.weight}kg</p>
+            <div class="pokemon-statsp">
+                <p class="statsp">${poke.height}m</p>
+                <p class="statsp">${poke.weight}kg</p>
             </div>
         </div>
     `;
     listaPokemon.append(div);
 }
-
+// botones header pokedex
 botonesHeader.forEach(boton => boton.addEventListener("click", (event) => {
     const botonId = event.currentTarget.id;
 
@@ -76,10 +75,6 @@ botonesHeader.forEach(boton => boton.addEventListener("click", (event) => {
 
 }))
 
-
-// POPUP ******************************************************
-
-
 /* 🎧 ESCUCHAR CLICK EN TARJETAS */
 const listaPokemonEl = document.querySelector("#listaPokemon");
 
@@ -97,36 +92,11 @@ listaPokemonEl.addEventListener("click", (event) => {
 });
 
 
-/* 🔍 FUNCIÓN PARA OBTENER DATOS DEL POKÉMON - prueba */
-// async function getPokemonInfo(pokemonId) {
-//   try {
-//     const response = await fetch(`${URL}${pokemonId}`);
-    
-//     if (!response.ok) throw new Error("Pokémon no encontrado");
 
-//     const data = await response.json();
-    
-//     console.log("📌 Datos completos del Pokémon:");
-//     console.log(data);
-
-//     console.log("Nombre:", data.name);
-//     console.log("Imagen:", data.sprites.other["official-artwork"].front_default);
-//     console.log("Altura:", data.height);
-//     console.log("Peso:", data.weight);
-//     console.log("Tipos:", data.types.map(t => t.type.name));
-//     console.log("Stats:", data.stats.map(s => `${s.stat.name}: ${s.base_stat}`));
-
-//   } catch (error) {
-//     console.error("❌ Error obteniendo los datos del Pokémon:", error);
-//   }
-// }
+// empueza todo lo del POPUP ******************************************************
 
 /***********Debilidades pokemon*********** */
 
-/**
- * renderWeaknesses(weaknesses)
- * weaknesses: [{type, mult}, ...]
- */
 function renderWeaknesses(weaknesses) {
   const container = document.getElementById("weaknessContainer");
   if (!container) return;
@@ -147,7 +117,8 @@ function renderWeaknesses(weaknesses) {
   });
 }
 
-function renderStats(stats, mainType) {
+/* MOSTRAR ESTADISTICAS */
+function renderStats(stats, mainType2) {
   const container = document.getElementById("statsContainer");
   if (!container) return;
 
@@ -164,7 +135,7 @@ function renderStats(stats, mainType) {
     row.innerHTML = `
       <span class="stat-name">${s.stat.name}</span>
       <div class="stat-bar">
-        <div class="stat-bar-fill ${mainType}"></div>
+        <div class="stat-bar-fill type-${mainType2}"></div>
       </div>
       <span class="stat-value">${s.base_stat}</span>
     `;
@@ -173,16 +144,15 @@ function renderStats(stats, mainType) {
 
     // animación 🌈
     requestAnimationFrame(() => {
-      row.querySelector(".stat-bar-fill").style.width = `${percent}%`;
+    //   row.querySelector(".stat-bar-fill").style.width = `${percent}%`;
+    const bar = row.querySelector(".stat-bar-fill");
+    bar.style.width = `${percent}%`;
     });
   });
 }
 
 
-/**
- * loadWeaknesses(typeUrls)
- * typeUrls: array de URLs (data.types[].type.url) o nombres (acepta ambos)
- */
+/**CARGAR DEBILIDADES  */
 async function loadWeaknesses(typeInputs) {
   try {
     if (!typeInputs || typeInputs.length === 0) {
@@ -250,10 +220,6 @@ async function loadWeaknesses(typeInputs) {
 }
 
 
-
-/********************** */
-
-
 /**Evoluciones pokemon */
 function renderEvolutionChain(evolutionList) {
   const container = document.getElementById("evolutionContainer");
@@ -273,8 +239,7 @@ function renderEvolutionChain(evolutionList) {
   });
 }
 
-
-/** Evoluciones 2 */
+/** CARGAR Evoluciones */
 async function loadEvolutionChain(speciesUrl) {
   try {
     const speciesRes = await fetch(speciesUrl);
@@ -335,7 +300,7 @@ async function getPokemonInfo(pokemonId) {
     document.getElementById("popupHeight").textContent = data.height;
     document.getElementById("popupWeight").textContent = data.weight;
 
-    // Tipos
+    // TIPO PRINCIPAL DE POKEMON - COLOR TARJETA ****************************
     const typesEl = document.getElementById("popupTypes");
     typesEl.innerHTML = "";
     data.types.forEach(t => {
@@ -345,7 +310,6 @@ async function getPokemonInfo(pokemonId) {
       typesEl.appendChild(typeBtn);
     });
 
-    // Stats
     const statsEl = document.getElementById("popupStats");
     statsEl.innerHTML = "";
     data.stats.forEach(s => {
@@ -354,28 +318,29 @@ async function getPokemonInfo(pokemonId) {
       statsEl.appendChild(li);
     });
 
-    // Obtener tipo principal del Pokémon
+    // Obtener tipo principal del Pokémon - COLOR TARJETA
     const mainType = data.types[0].type.name;
 
-    // Referencia a la tarjeta popup
+    // Referencia a la tarjeta popup - COLOR TARJETA
     const popupCard = document.querySelector(".popup-card");
 
-    // Limpiar clases anteriores de tipo
+    // Limpiar clases anteriores de tipo - COLOR TARJETA
     popupCard.className = "popup-card";
 
-    // Agregar la clase del tipo para el color dinámico
+    // Agregar la clase del tipo para el color dinámico - COLOR TARJETA
     popupCard.classList.add(mainType);
 
-    //cargar evoluciones pokemon
-    loadEvolutionChain(data.species.url);
+    //BARRAS ESTADISTICAS BASE*****************************************************************
 
-    // Tipos
+    // Tipos para estadiisticas base
     const typeNames = data.types.map(t => t.type.name);
     const mainType2 = typeNames[0];
 
-    // Render Stats
+    // renderizar estadisticas base
     renderStats(data.stats, mainType2);
 
+    //EVOLUCIONES POKEMON *********************************************************************
+    loadEvolutionChain(data.species.url);
 
   } catch (error) {
     console.error("❌ Error obteniendo los datos del Pokémon:", error);
