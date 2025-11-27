@@ -472,20 +472,7 @@ main{
   height: auto;
 }
 
-
-
-/* Info meta (Altura / Peso) en 2 columnas */
-.info {
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: 8px;
-  margin-top: 6px;
-}
-.info p {
-  margin: 0;
-  font-size: 0.95rem;
-}
-
+/*Boton cierre */
 .close-btn {
   position: absolute;
   top: 10px;
@@ -499,6 +486,7 @@ main{
   height: 30px;
 }
 
+
 .types span {
   margin: 5px;
   padding: 5px 12px;
@@ -510,37 +498,30 @@ main{
 
 /*BARRAS DE  lAS ESTADISTICAS BASE ********************************************/
 
+
+
 .stats-section {
   margin-top: 16px;
-}
+  text-align: center;
 
-.stat{
-    background-color: var(--clr-gray);
-    padding: .25rem .5rem;
-    border-radius: 50vmax;
-    
 }
 
 .stats-container {
   display: grid;
   grid-template-columns: repeat(2, 1fr); /* 2 columnas */
-  gap: 10px 20px;
+  gap: 15px 80px;
   width: 100%;
 }
 
 .stat {
   display: grid;
-  grid-template-columns: 70px 1fr 35px;
+  grid-template-columns: 90px 2fr 60px;
   align-items: center;
-  gap: 6px;
-  width: 100%;
-  color: var(--clr-white);
-}
-
-.stat-item {
-  width: 100%;
-  max-width: 300px;
-  text-align: center;
+  gap: 5px;
+  width: 130%;
+  background-color: var(--clr-gray);
+  border-radius: 50vmax;
+  padding: .25rem .5rem;
 }
 
 .stat-name {
@@ -548,53 +529,25 @@ main{
   font-weight: 600;
 }
 
-/* Cuando la stat está en el contenedor de dos columnas, queremos que el nombre ocupe un ancho fijo */
-.stat .stat-name {
-  width: 78px;
-  font-weight: 700;
-}
-
 .stat-bar {
-  position: relative;
-  width: 100%;
-  height: 8px;
-  background: rgba(255,255,255,0.15);
-  border-radius: 8px;
+  width: 180%;
+  height: 14px;
+  background: rgba(0,0,0,0.1);
+  border-radius: 999px;
   overflow: hidden;
 }
 
 .stat-bar-fill {
   height: 100%;
   width: 0%;
-  border-radius: 8px;
-  transition: width 0.8s ease; /* animación 👌 */
+  border-radius: 999px;
+  transition: width 1s ease-out; /* animación */
 }
 
 .stat-value {
   text-align: right;
   font-weight: 700;
-}
-
-
-/* Aseguramos que la barra se expanda correctamente */
-.stat .stat-bar {
-  flex: 1;
-  height: 10px;
-  background: rgba(255,255,255,0.12);
-  border-radius: 999px;
-  overflow: hidden;
-}
-.stat .stat-bar .stat-bar-fill {
-  height: 100%;
-  width: 0%;
-  transition: width 0.9s cubic-bezier(.2,.9,.2,1);
-}
-
-/* Label del valor */
-.stat .stat-value {
-  width: 40px;
-  text-align: right;
-  font-weight: 800;
+  font-size: 14px;
 }
 
 /* Ajustes visuales para badges (debilidades / tipos) */
