@@ -281,10 +281,6 @@ async function getPokemonInfo(pokemonId) {
   try {
     const response = await fetch(`${URL}${pokemonId}`);
     const data = await response.json();
-<<<<<<< HEAD
-
-=======
->>>>>>> version2pokedex
     const typeUrls = data.types.map(t => t.type.url);
     loadWeaknesses(typeUrls);
 
