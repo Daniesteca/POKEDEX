@@ -325,7 +325,7 @@ main{
 /* POPUP ****************************************/
 /* 🔥 POPUP GENERAL */
 .popup-container {
-  padding: 24px;
+  padding: 10px 10px;;
   position: fixed;
   top: 0;
   left: 0;
@@ -345,8 +345,8 @@ main{
 /* TARJETA POPUP */
 .popup-card {
   width: 100%;
-  max-width: 760px;
-  padding: 28px;
+  max-width: 600px;
+  padding: 10px 10px;
   box-shadow: 0 10px 30px rgba(0,0,0,0.45);
   display: flex;
   flex-direction: column;
@@ -501,27 +501,34 @@ main{
 
 
 .stats-section {
-  margin-top: 16px;
+  margin-top: 20px;
   text-align: center;
 
+}
+
+/*titulo estadisticas base*/
+.stats-section strong {
+  display: block; 
+  margin-bottom: 12px;
+  font-size: 18px; 
 }
 
 .stats-container {
   display: grid;
   grid-template-columns: repeat(2, 1fr); /* 2 columnas */
-  gap: 15px 80px;
+  gap: 15px 20px;
   width: 100%;
 }
 
 .stat {
-  display: grid;
-  grid-template-columns: 90px 2fr 60px;
-  align-items: center;
-  gap: 5px;
-  width: 130%;
+  width: 100%;
   background-color: var(--clr-gray);
   border-radius: 50vmax;
   padding: .25rem .5rem;
+  display: grid;
+  grid-template-columns: 1fr 2.5fr 35px; /* Texto | Barra | Valor */
+  align-items: center;
+  gap: 10px;
 }
 
 .stat-name {
@@ -530,8 +537,8 @@ main{
 }
 
 .stat-bar {
-  width: 180%;
-  height: 14px;
+  width: 100%;
+  height: 16px;
   background: rgba(0,0,0,0.1);
   border-radius: 999px;
   overflow: hidden;
@@ -547,7 +554,7 @@ main{
 .stat-value {
   text-align: right;
   font-weight: 700;
-  font-size: 14px;
+  font-size: 15px;
 }
 
 /* Ajustes visuales para badges (debilidades / tipos) */
