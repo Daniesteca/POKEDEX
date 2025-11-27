@@ -91,8 +91,6 @@ listaPokemonEl.addEventListener("click", (event) => {
   getPokemonInfo(pokemonId);
 });
 
-
-
 //  *************************EMPIEZA EL POPUP *****************************
 
 /* MOSTRAR ESTADISTICAS */
@@ -278,9 +276,6 @@ function renderEvolutionChain(evolutionList) {
   });
 }
 
-
-
-
 /* Insertar datos en POP UP HTML*/
 async function getPokemonInfo(pokemonId) {
   try {
@@ -345,4 +340,12 @@ async function getPokemonInfo(pokemonId) {
 document.getElementById("closePopup").addEventListener("click", () => {
   document.getElementById("pokemonPopup").classList.add("hidden");
 });
+
+// Cerrar cuando se hace clic fuera del popup-content
+document.getElementById("pokemonPopup").addEventListener("click", (e) => {
+  if (e.target === document.getElementById("pokemonPopup")) {
+    document.getElementById("pokemonPopup").classList.add("hidden");
+  }
+});
+
 
