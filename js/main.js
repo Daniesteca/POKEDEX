@@ -93,29 +93,7 @@ listaPokemonEl.addEventListener("click", (event) => {
 
 
 
-// empueza todo lo del POPUP ******************************************************
-
-/***********Debilidades pokemon*********** */
-
-function renderWeaknesses(weaknesses) {
-  const container = document.getElementById("weaknessContainer");
-  if (!container) return;
-
-  container.innerHTML = "";
-
-  if (!weaknesses || weaknesses.length === 0) {
-    container.innerHTML = `<span class="weakness">—</span>`;
-    return;
-  }
-
-  weaknesses.forEach(w => {
-    const span = document.createElement("span");
-    span.className = `weakness ${w.type}`; // añade clase tipo para color si existe
-    const multText = (w.mult % 1 === 0) ? `${w.mult}x` : `${w.mult}x`; // ejemplo "2x" o "1.5x"
-    span.innerHTML = `<strong style="font-weight:700; margin-right:6px;">${multText}</strong> ${w.type}`;
-    container.appendChild(span);
-  });
-}
+//  *************************EMPIEZA EL POPUP *****************************
 
 /* MOSTRAR ESTADISTICAS */
 function renderStats(stats, mainType2) {
@@ -133,9 +111,10 @@ function renderStats(stats, mainType2) {
     row.className = "stat";
 
     row.innerHTML = `
+      
       <span class="stat-name">${s.stat.name}</span>
       <div class="stat-bar">
-        <div class="stat-bar-fill type-${mainType2}"></div>
+        <div class="stat-bar-fill ${mainType2}"></div>
       </div>
       <span class="stat-value">${s.base_stat}</span>
     `;
@@ -144,9 +123,7 @@ function renderStats(stats, mainType2) {
 
     // animación 🌈
     requestAnimationFrame(() => {
-    //   row.querySelector(".stat-bar-fill").style.width = `${percent}%`;
-    const bar = row.querySelector(".stat-bar-fill");
-    bar.style.width = `${percent}%`;
+      row.querySelector(".stat-bar-fill").style.width = `${percent}%`;
     });
   });
 }
@@ -219,23 +196,25 @@ async function loadWeaknesses(typeInputs) {
   }
 }
 
+/***********Debilidades pokemon*********** */
 
-/**Evoluciones pokemon */
-function renderEvolutionChain(evolutionList) {
-  const container = document.getElementById("evolutionContainer");
+function renderWeaknesses(weaknesses) {
+  const container = document.getElementById("weaknessContainer");
+  if (!container) return;
+
   container.innerHTML = "";
 
-  evolutionList.forEach(evo => {
-    const div = document.createElement("div");
-    div.classList.add("evolution-card");
+  if (!weaknesses || weaknesses.length === 0) {
+    container.innerHTML = `<span class="weakness">—</span>`;
+    return;
+  }
 
-    div.innerHTML = `
-      <img src="${evo.img}" alt="${evo.name}">
-      <p>${evo.name}</p>
-      <p class="evolution-method">${evo.method}</p>
-    `;
-
-    container.appendChild(div);
+  weaknesses.forEach(w => {
+    const span = document.createElement("span");
+    span.className = `weakness ${w.type}`; // añade clase tipo para color si existe
+    const multText = (w.mult % 1 === 0) ? `${w.mult}x` : `${w.mult}x`; // ejemplo "2x" o "1.5x"
+    span.innerHTML = `<strong style="font-weight:700; margin-right:6px;">${multText}</strong> ${w.type}`;
+    container.appendChild(span);
   });
 }
 
@@ -280,6 +259,27 @@ async function loadEvolutionChain(speciesUrl) {
   }
 }
 
+/**Evoluciones pokemon */
+function renderEvolutionChain(evolutionList) {
+  const container = document.getElementById("evolutionContainer");
+  container.innerHTML = "";
+
+  evolutionList.forEach(evo => {
+    const div = document.createElement("div");
+    div.classList.add("evolution-card");
+
+    div.innerHTML = `
+      <img src="${evo.img}" alt="${evo.name}">
+      <p>${evo.name}</p>
+      <p class="evolution-method">${evo.method}</p>
+    `;
+
+    container.appendChild(div);
+  });
+}
+
+
+
 
 /* Insertar datos en POP UP HTML*/
 async function getPokemonInfo(pokemonId) {
@@ -308,14 +308,6 @@ async function getPokemonInfo(pokemonId) {
       typeBtn.textContent = t.type.name.toUpperCase();
       typeBtn.classList.add(t.type.name); // Para colores personalizados
       typesEl.appendChild(typeBtn);
-    });
-
-    const statsEl = document.getElementById("popupStats");
-    statsEl.innerHTML = "";
-    data.stats.forEach(s => {
-      const li = document.createElement("li");
-      li.textContent = `${s.stat.name.toUpperCase()}: ${s.base_stat}`;
-      statsEl.appendChild(li);
     });
 
     // Obtener tipo principal del Pokémon - COLOR TARJETA
