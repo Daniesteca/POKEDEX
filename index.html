@@ -13,31 +13,36 @@
 <body>
     
 <header>
-    <nav class="nav">
-         <img src="./img/logo.png" alt="Logo Pokédex">
-        <ul class="nav-list">
-            <li class="nav-item"><button class="btn btn-header" id="ver-todos">Ver todos</button> </li>
-            <li class="nav-item"><button class="btn btn-header normal" id="normal">Normal</button> </li>
-            <li class="nav-item"><button class="btn btn-header fire" id="fire">Fire</button> </li>
-            <li class="nav-item"><button class="btn btn-header water" id="water">Water</button> </li>
-            <li class="nav-item"><button class="btn btn-header grass" id="grass">Grass</button> </li>
-            <li class="nav-item"><button class="btn btn-header electric" id="electric">Electric</button> </li>
-            <li class="nav-item"><button class="btn btn-header ice" id="ice">Ice</button> </li>
-            <li class="nav-item"><button class="btn btn-header fighting" id="fighting">Fighting</button> </li>
-            <li class="nav-item"><button class="btn btn-header poison" id="poison">Poison</button> </li>
-            <li class="nav-item"><button class="btn btn-header ground" id="ground">Ground</button> </li>
-            <li class="nav-item"><button class="btn btn-header flying" id="flying">flying</button> </li>
-            <li class="nav-item"><button class="btn btn-header psychic" id="psychic">psychic</button> </li>
-            <li class="nav-item"><button class="btn btn-header bug" id="bug">bug</button> </li>
-            <li class="nav-item"><button class="btn btn-header rock" id="rock">rock</button> </li>
-            <li class="nav-item"><button class="btn btn-header ghost" id="ghost">ghost</button> </li>
-            <li class="nav-item"><button class="btn btn-header dark" id="dark">dark</button> </li>
-            <li class="nav-item"><button class="btn btn-header dragon" id="dragon">dragon</button> </li>
-            <li class="nav-item"><button class="btn btn-header steel" id="steel">steel</button> </li>
-            <li class="nav-item"><button class="btn btn-header fairy" id="fairy">fairy</button> </li>
-        </ul>
-    </nav>
+  <nav class="nav">
+    <img src="./img/logo.png" alt="Logo Pokédex">
+
+    <label for="typeFilter" class="filter-label">Filtrar tipo de Pokémon:</label>
+    <select id="typeFilter" class="filter-select">
+      <option value="ver-todos">Ver todos</option>
+      <option value="normal">Normal</option>
+      <option value="fire">Fire</option>
+      <option value="water">Water</option>
+      <option value="grass">Grass</option>
+      <option value="electric">Electric</option>
+      <option value="ice">Ice</option>
+      <option value="fighting">Fighting</option>
+      <option value="poison">Poison</option>
+      <option value="ground">Ground</option>
+      <option value="flying">Flying</option>
+      <option value="psychic">Psychic</option>
+      <option value="bug">Bug</option>
+      <option value="rock">Rock</option>
+      <option value="ghost">Ghost</option>
+      <option value="dark">Dark</option>
+      <option value="dragon">Dragon</option>
+      <option value="steel">Steel</option>
+      <option value="fairy">Fairy</option>
+    </select>
+  </nav>
 </header>
+
+
+
 <!-- cards pokemon -->
 <main>
     <div id="todos">

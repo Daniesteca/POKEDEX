@@ -50,33 +50,30 @@ function mostrarpokemon(poke){
     `;
     listaPokemon.append(div);
 }
-// botones header pokedex
-botonesHeader.forEach(boton => boton.addEventListener("click", (event) => {
-    const botonId = event.currentTarget.id;
 
-    listaPokemon.innerHTML = "";
 
-    for (let i = 1; i <= 151; i++){
+const typeFilter = document.getElementById("typeFilter");
+
+typeFilter.addEventListener("change", (event) => {
+  const filtro = event.target.value;
+  listaPokemon.innerHTML = "";
+
+  for (let i = 1; i <= 151; i++) {
     fetch(URL + i)
-        .then((response)=> response.json())
-        .then( data => {
+      .then((res) => res.json())
+      .then((data) => {
+        if (filtro === "ver-todos") {
+          mostrarpokemon(data);
+        } else {
+          const tipos = data.types.map(t => t.type.name);
+          if (tipos.includes(filtro)) {
+            mostrarpokemon(data);
+          }
+        }
+      });
+  }
+});
 
-
-            if(botonId === "ver-todos"){
-                mostrarpokemon(data);
-            }else {
-                const tipos = data.types.map(type => type.type.name);
-                if (tipos.some(tipo =>  tipo.includes(botonId))){
-                    mostrarpokemon(data);
-                }
-            }
-
-
-        })
-    
-    }
-
-}))
 
 /* 🎧 ESCUCHAR CLICK EN TARJETAS */
 const listaPokemonEl = document.querySelector("#listaPokemon");
@@ -295,6 +292,7 @@ async function loadEvolutionChain(speciesUrl) {
   }
 }
 
+/*ID de pokemon para desplazamiento con flechas laterales*/
 async function getPokemonById(id) {
   const res = await fetch(`${URL}${id}`);
   const data = await res.json();
