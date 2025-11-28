@@ -216,7 +216,35 @@ function renderWeaknesses(weaknesses) {
   });
 }
 
-/** CARGAR Evoluciones */
+
+
+/**Evoluciones pokemon */
+function renderEvolutionChain(evolutionList) {
+  const container = document.getElementById("evolutionContainer");
+  container.innerHTML = "";
+
+  evolutionList.forEach(evo => {
+    const div = document.createElement("div");
+    div.classList.add("evolution-card");
+
+    // 🔹 Guardamos el nombre del Pokémon en el card
+    div.setAttribute("data-pokemon", evo.name.toLowerCase());
+
+    div.innerHTML = `
+      <img src="${evo.img}" alt="${evo.name}">
+      <p>${evo.name}</p>
+      <p class="evolution-method">${evo.method}</p>
+    `;
+    // 🔹 Hacemos clickeable cada evolución
+    div.addEventListener("click", () => {
+      getPokemonInfo(evo.name.toLowerCase());
+    });
+
+    container.appendChild(div);
+  });
+}
+
+/** CARGAR Evoluciones  en popup usa render*/
 async function loadEvolutionChain(speciesUrl) {
   try {
     const speciesRes = await fetch(speciesUrl);
@@ -255,25 +283,6 @@ async function loadEvolutionChain(speciesUrl) {
   } catch (error) {
     console.error("❌ Error cargando evoluciones:", error);
   }
-}
-
-/**Evoluciones pokemon */
-function renderEvolutionChain(evolutionList) {
-  const container = document.getElementById("evolutionContainer");
-  container.innerHTML = "";
-
-  evolutionList.forEach(evo => {
-    const div = document.createElement("div");
-    div.classList.add("evolution-card");
-
-    div.innerHTML = `
-      <img src="${evo.img}" alt="${evo.name}">
-      <p>${evo.name}</p>
-      <p class="evolution-method">${evo.method}</p>
-    `;
-
-    container.appendChild(div);
-  });
 }
 
 /* Insertar datos en POP UP HTML*/
