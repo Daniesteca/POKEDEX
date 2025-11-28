@@ -52,6 +52,7 @@ function mostrarpokemon(poke){
 }
 
 
+// filtro tipo pokemon
 const typeFilter = document.getElementById("typeFilter");
 
 typeFilter.addEventListener("change", (event) => {
@@ -71,6 +72,19 @@ typeFilter.addEventListener("change", (event) => {
           }
         }
       });
+  }
+});
+
+//modo claro/oscuro
+const toggleBtn = document.getElementById("toggleTheme");
+toggleBtn.addEventListener("click", () => {
+  document.body.classList.toggle("light-mode");
+
+  // Cambiar texto del botón
+  if (document.body.classList.contains("light-mode")) {
+    toggleBtn.textContent = "Modo Oscuro";
+  } else {
+    toggleBtn.textContent = "Modo Claro";
   }
 });
 

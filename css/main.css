@@ -785,3 +785,52 @@ main{
     gap: 5px;
   }
 }
+
+
+/* Botón */
+.theme-btn {
+  background: #ffffff22;
+  border: 1px solid #ffffff55;
+  padding: 6px 12px;
+  border-radius: 6px;
+  cursor: pointer;
+  backdrop-filter: blur(3px);
+}
+
+.theme-btn:hover {
+  background: #ffffff44;
+}
+
+/* 🌞 MODO CLARO – Aplica solo si body tiene la clase light-mode */
+body.light-mode {
+  background: var(--clr-gray);
+  color: #222;
+}
+
+body.light-mode .pokemon{
+     background-color: #5e5c5c44;
+     color: #222;
+     box-shadow: 0 0 3rem -1rem rgba(135, 135, 135, 0.25);
+}
+
+/* Tarjetas y textos en Modo Claro */
+body.light-mode .pokemon-card {
+  background: var(--clr-gray);
+  box-shadow: 0 0 10px #00000015;
+}
+
+body.light-mode header,
+body.light-mode .nav {
+  background: var(  --bk-darklight);
+  backdrop-filter: blur(6px);
+}
+
+body.light-mode #listaPokemon .pokemon-card span {
+  color: #222;
+}
+
+/* Ajuste de textos */
+body.light-mode .pokemon-card h2,
+body.light-mode .pokemon-card p {
+  color: #222;
+}
