@@ -667,6 +667,17 @@ main{
   margin-top: 4px;
 }
 
+.evolution-card.current-evolution {
+  border: 3px solid var(--clr-gray);
+  box-shadow: 0 0 12px var(--clr-gray);
+  transform: scale(1.05);
+}
+
+.evolution-card.current-evolution img {
+  filter: drop-shadow(0 0 10px rgba(0, 0, 0, 0.7));
+}
+
+
 
 /* ---- RESPONSIVE POPUP ---- */
 

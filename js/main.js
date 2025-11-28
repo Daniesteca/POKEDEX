@@ -219,7 +219,7 @@ function renderWeaknesses(weaknesses) {
 
 
 /**Evoluciones pokemon */
-function renderEvolutionChain(evolutionList) {
+function renderEvolutionChain(evolutionList, currentPokemon) {
   const container = document.getElementById("evolutionContainer");
   container.innerHTML = "";
 
@@ -227,8 +227,13 @@ function renderEvolutionChain(evolutionList) {
     const div = document.createElement("div");
     div.classList.add("evolution-card");
 
-    // 🔹 Guardamos el nombre del Pokémon en el card
+        // 🔹 Guardamos el nombre del Pokémon en el card
     div.setAttribute("data-pokemon", evo.name.toLowerCase());
+
+     // Si corresponde al Pokémon actual, destacarlo --------------|
+    if (evo.name.toLowerCase() === currentPokemon.toLowerCase()) {
+      div.classList.add("current-evolution");
+    }
 
     div.innerHTML = `
       <img src="${evo.img}" alt="${evo.name}">
@@ -278,7 +283,9 @@ async function loadEvolutionChain(speciesUrl) {
       evoStage = evoStage.evolves_to[0];
     }
 
-    renderEvolutionChain(evoChain);
+    // renderEvolutionChain(evoChain);
+    renderEvolutionChain(evoChain, speciesData.name);
+
 
   } catch (error) {
     console.error("❌ Error cargando evoluciones:", error);
