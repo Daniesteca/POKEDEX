@@ -1,6 +1,9 @@
 const listaPokemon = document.querySelector("#listaPokemon");
 const botonesHeader = document.querySelectorAll(".btn-header");
 let URL = "https://pokeapi.co/api/v2/pokemon/";
+let currentPokemonId = null;
+
+
 
 for (let i = 1; i <= 151; i++){
     fetch(URL + i)
@@ -85,7 +88,7 @@ listaPokemonEl.addEventListener("click", (event) => {
   const idText = card.querySelector(".pokemon-id")?.textContent || "";
   const pokemonId = parseInt(idText.replace("#", "").trim(), 10);
   
-  console.log("📌 Click → Solicitar datos de API con ID:", pokemonId);
+  // console.log("📌 Click → Solicitar datos de API con ID:", pokemonId);
 
   // ✔ Aquí la llamada correcta
   getPokemonInfo(pokemonId);
@@ -292,12 +295,20 @@ async function loadEvolutionChain(speciesUrl) {
   }
 }
 
+async function getPokemonById(id) {
+  const res = await fetch(`${URL}${id}`);
+  const data = await res.json();
+  getPokemonInfo(data.id); // ⭐ Usamos data.id, no todo el objeto
+}
+
+
 /* Insertar datos en POP UP HTML*/
 async function getPokemonInfo(pokemonId) {
   try {
     const response = await fetch(`${URL}${pokemonId}`);
     const data = await response.json();
     const typeUrls = data.types.map(t => t.type.url);
+    currentPokemonId = data.id;
     loadWeaknesses(typeUrls);
 
 
@@ -364,4 +375,22 @@ document.getElementById("pokemonPopup").addEventListener("click", (e) => {
   }
 });
 
+document.getElementById("prevPokemon").addEventListener("click", (event) => {
+  event.stopPropagation();
+  if (currentPokemonId > 1) {
+    getPokemonById(currentPokemonId - 1);
+  }
+});
+
+document.getElementById("nextPokemon").addEventListener("click", (event) => {
+  event.stopPropagation();
+  if (currentPokemonId < 898) {
+    getPokemonById(currentPokemonId + 1);
+  }
+});
+
+
+
+console.log('prev:', document.getElementById('prevPokemon'));
+console.log('next:', document.getElementById('nextPokemon'));
 

@@ -49,13 +49,18 @@
 
 <!-- 🔥 POPUP POKÉMON -->
 <div id="pokemonPopup" class="popup-container hidden">
+
+<!-- Flecha izquierda -->
+<button id="prevPokemon" class="nav-btn nav-left">
+<img src="./img/flecha-izquierda.png" alt="Prev">
+</button>
+
   <div class="popup-card">
 
     <button id="closePopup" class="close-btn">X</button>
-
     <div class="popup-header">
-    <img id="popupImg" src="" alt="pokemon image">
-    <h2 id="popupName"></h2>
+        <img id="popupImg" src="" alt="pokemon image">
+        <h2 id="popupName"></h2>
     </div>
 
     <!-- 🔹 Altura y Peso -->
@@ -85,7 +90,15 @@
     </div>
 
   </div>
+
+<!-- Flecha derecha -->
+<button id="nextPokemon" class="nav-btn nav-right">
+<img src="./img/flecha-correcta.png" alt="Next">
+</button>
+  
 </div>
+
+
 
 
 <script src="./js/main.js" ></script>
