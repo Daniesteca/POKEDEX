@@ -778,3 +778,10 @@ main{
   background-color: #ffffff;
   cursor: pointer;
 }
+
+@media (max-width: 500px) {
+  .nav {
+    flex-direction: column;
+    gap: 5px;
+  }
+}
